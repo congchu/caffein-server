@@ -1,10 +1,12 @@
 var express = require("express");
 const PORT = process.env.PORT || 5000;
+const cors = require("cors");
 
 var app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 // Ccamp APIs
 app.get("/api/camps/:camp_id", (req, res) => {
