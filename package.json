@@ -1,0 +1,26 @@
+{
+  "name": "caffein-server",
+  "version": "1.0.0",
+  "description": "cafffein server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/congchu/caffein-server.git"
+  },
+  "keywords": [
+    "node.js"
+  ],
+  "author": "KooMinJeong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/congchu/caffein-server/issues"
+  },
+  "homepage": "https://github.com/congchu/caffein-server#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "nodemon": "^2.0.15"
+  }
+}
