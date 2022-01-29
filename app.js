@@ -3,101 +3,35 @@ const PORT = process.env.PORT || 5000;
 
 var app = express();
 
-//Express 4.16.0버전 부터 body-parser의 일부 기능이 익스프레스에 내장 body-parser 연결
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//임시 데이터
-const users = [
-  { id: 1, name: "유저1" },
-  { id: 2, name: "유저2" },
-  { id: 3, name: "유저3" },
-];
-
-/**
- * @path { GET } http://localhost:3000/api/users
- * @description 요청 데이터 값이 없고 반환 값이 있는 GET Method
- */
-
-app.get("/api/users", (req, res) => {
-  //유저 정보 반환
-  res.json({ users: users });
+// Ccamp APIs
+app.get("/api/camps/:camp_id", (req, res) => {
+  const camp_id = req.params.camp_id;
+  const camp = campsMock.find((camp) => camp.id == camp_id);
+  res.json({ camp: camp });
 });
 
-/**
- * @path {GET} http://localhost:3000/api/users/:user_id
- * @description Path Variables 요청 데이터 값이 있고 반환 값이 있는 GET Method
- *
- *  Path Variables 방식
- *
- *  ex) 아래 GET 주소 에서 :user_id 는 서버에서 설정한 주소 키 값이다.
- *      값을 찾을 때는 req.params.user_id 로 값을 찾는다.
- *
- *  *주의 사항*
- *  :user_id 이 부분은 변수이기 때문에
- *  경로가 /users/1 이거나 /users/2 이거 일때 둘다 라우터를 거치게 된다.
- *  그렇기 때문에 다른 라우터 보다 아래 있어야 한다.
- */
+app.get("/api/camps", (req, res) => {
+  let result = campsMock;
 
-app.get("/api/users/:user_id", (req, res) => {
-  const user_id = req.params.user_id;
+  const type = req.query && req.query.type;
+  if (type) {
+    result = result.filter((camp) => camp.type == type);
+  }
 
-  //filter라는 함수는 자바스크립트에서 배열 함수이다. 필터링을 할때 많이 사용된다 필터링한 데이터를 새로운 배열로 반환한다.
-  const user = users.filter((data) => data.id == user_id);
-
-  res.json({ ok: true, user: user });
+  res.json({ camps: result });
 });
 
-/**
- * @path {POST} http://localhost:3000/api/users
- * @description POST Method
- *
- *  POST 데이터를 생성할 때 사용된다.
- *  req.body에 데이터를 담아서 보통 보낸다.
- */
-app.post("/api/users", (req, res) => {
-  // 구조분해를 통해 id 와 name을 추출
-  const { id, name } = req.body;
+// Community APIs
 
-  //concat 함수는 자바스크립트에서 배열 함수이다. 새로운 데이터를 추가하면 새로운 배열로 반환한다.
-  const user = users.concat({ id, name });
-
-  res.json({ ok: true, users: user });
+app.get("/api/communities", (req, res) => {
+  res.json({ communities: communityMock });
 });
 
-/**
- * @path {PUT} http://localhost:3000/api/users
- * @description 전체 데이터를 수정할 때 사용되는 Method
- */
-app.put("/api/users/:user_id", (req, res) => {
-  const user_id = req.params.user_id;
-  const { name } = req.body;
-
-  //filter라는 함수는 자바스크립트에서 배열 함수이다. 필터링을 할때 많이 사용된다 필터링한 데이터를 새로운 배열로 반환한다.
-  const user = users.filter((data) => data.id == user_id);
-
-  res.json({ ok: true, user: user });
-});
-
-/**
- * @path {PATCH} http://localhost:3000/api/user/update/:user_id
- * @description 단일 데이터를 수정할 때 사용되는 Method
- */
-app.patch("/api/user/:user_id", (req, res) => {
-  const { user_id } = req.params;
-  const { name } = req.body;
-
-  //map 함수는 자바스크립트에서 배열 함수이다. 요소를 일괄적으로 변경할 때 사용됩니다.
-  const user = users.map((data) => {
-    if (data.id == user_id) data.name = name;
-
-    return {
-      id: data.id,
-      name: data.name,
-    };
-  });
-
-  res.json({ ok: true, users: user });
+app.get("/api/communities/:community_id", (req, res) => {
+  res.json({ communities: campsMock });
 });
 
 app.get("/", function (req, res) {
@@ -107,3 +41,144 @@ app.get("/", function (req, res) {
 app.listen(PORT, function () {
   console.log("start! express server on port 5000");
 });
+
+//임시 데이터
+const users = [
+  { id: 1, name: "유저1" },
+  { id: 2, name: "유저2" },
+  { id: 3, name: "유저3" },
+];
+
+const campsMock = [
+  {
+    id: 1,
+    name: "업무 단순화 & 자동화로 엑셀을 실무에 더 적극 활용하기",
+    type: "popular",
+    status: "모집중",
+    field: "데이터분석",
+    skill: "Excel",
+    startDate: "2021-03-13",
+    thumbnail: "https://cdn.comento.kr/images/pt/tmp/prefix_44UsYDVNuM.jpg",
+  },
+  {
+    id: 2,
+    name: "React 실무 프로젝트로 역량 업그레이드",
+    type: "popular",
+    status: "모집중",
+    field: "데이터분석",
+    skill: "Excel",
+    startDate: "2021-03-13",
+    thumbnail: "https://cdn.comento.kr/images/pt/tmp/prefix_44UsYDVNuM.jpg",
+  },
+  {
+    id: 3,
+    name: "개발자 없이 SQL로 데이터 추출하고 대시보드 만들기",
+    type: "popular",
+    status: "모집중",
+    field: "데이터분석",
+    skill: "Excel",
+    startDate: "2021-03-13",
+    thumbnail: "https://cdn.comento.kr/images/pt/tmp/prefix_44UsYDVNuM.jpg",
+  },
+  {
+    id: 4,
+    name: "쉽지만 강력한 엑셀로 데이터 분석과 업무 자동화까지",
+    type: "popular",
+    status: "모집중",
+    field: "데이터분석",
+    skill: "Excel",
+    startDate: "2021-03-13",
+    thumbnail: "https://cdn.comento.kr/images/pt/tmp/prefix_44UsYDVNuM.jpg",
+  },
+  {
+    id: 3,
+    name: "개발자 없이 SQL로 데이터 추출하고 대시보드 만들기",
+    type: "popular",
+    status: "모집중",
+    field: "데이터분석",
+    skill: "Excel",
+    startDate: "2021-03-13",
+    thumbnail: "https://cdn.comento.kr/images/pt/tmp/prefix_44UsYDVNuM.jpg",
+  },
+  {
+    id: 5,
+    name: "쉽지만 강력한 엑셀로 데이터 분석과 업무 자동화까지",
+    type: "sale",
+    status: "모집중",
+    field: "데이터분석",
+    skill: "Excel",
+    startDate: "2021-03-13",
+    thumbnail: "https://cdn.comento.kr/images/pt/tmp/prefix_44UsYDVNuM.jpg",
+  },
+];
+
+const communityMock = [
+  {
+    id: 21,
+    tags: ["야호", "정말"],
+    title: "합격 메일 답장 어떻게 할까요?",
+    content: "고칠 부분이 있는지 봐주시면 감사하겠습니다!",
+    comments: [
+      {
+        profile: "https://cdn.comento.kr/images/pt/tmp/prefix_44UsYDVNuM.jpg",
+        content: "와우",
+        nickname: "멘토1234",
+      },
+      {
+        profile: "https://cdn.comento.kr/images/pt/tmp/prefix_44UsYDVNuM.jpg",
+        content: "za",
+        nickname: "멘토1234",
+      },
+    ],
+  },
+  {
+    id: 18,
+    tags: ["야호", "정말"],
+    title: "합격 메일 답장 어떻게 할까요?",
+    content: "고칠 부분이 있는지 봐주시면 감사하겠습니다!",
+    comments: [
+      {
+        profile: "https://cdn.comento.kr/images/pt/tmp/prefix_44UsYDVNuM.jpg",
+        content: "와우",
+        nickname: "멘토1234",
+      },
+    ],
+  },
+  {
+    id: 15,
+    tags: ["야호", "정말"],
+    title: "합격 메일 답장 어떻게 할까요?",
+    content: "고칠 부분이 있는지 봐주시면 감사하겠습니다!",
+    comments: [
+      {
+        profile: "https://cdn.comento.kr/images/pt/tmp/prefix_44UsYDVNuM.jpg",
+        content: "와우",
+        nickname: "멘토1234",
+      },
+      {
+        profile: "https://cdn.comento.kr/images/pt/tmp/prefix_44UsYDVNuM.jpg",
+        content: "와우",
+        nickname: "멘토1234",
+      },
+    ],
+  },
+  {
+    id: 6,
+    tags: ["야호", "정말"],
+    title: "합격 메일 답장 어떻게 할까요?",
+    content:
+      "고칠 부분이 있는지 봐주시면 감사하겠습니다! 봐주시면 감사하겠습니다! 봐주시면 감사하겠습니다!봐주시면 감사하겠습니다!",
+    comments: [
+      {
+        profile: "https://cdn.comento.kr/images/pt/tmp/prefix_44UsYDVNuM.jpg",
+        content: "와우",
+        nickname: "멘토1234",
+      },
+      {
+        profile: "https://cdn.comento.kr/images/pt/tmp/prefix_44UsYDVNuM.jpg",
+        content: "와우",
+        nickname: "멘토1234",
+      },
+    ],
+  },
+];
