@@ -12,7 +12,7 @@ app.use(cors());
 app.get("/api/camps/:camp_id", (req, res) => {
   const camp_id = req.params.camp_id;
   const camp = campsMock.find((camp) => camp.id == camp_id);
-  res.json({ camp: camp });
+  res.json({ data: camp });
 });
 
 app.get("/api/camps", (req, res) => {
@@ -23,17 +23,17 @@ app.get("/api/camps", (req, res) => {
     result = result.filter((camp) => camp.type == type);
   }
 
-  res.json({ camps: result });
+  res.json({ data: result });
 });
 
 // Community APIs
 
 app.get("/api/communities", (req, res) => {
-  res.json({ communities: communityMock });
+  res.json({ data: communityMock });
 });
 
 app.get("/api/communities/:community_id", (req, res) => {
-  res.json({ communities: campsMock });
+  res.json({ data: campsMock });
 });
 
 app.get("/", function (req, res) {
