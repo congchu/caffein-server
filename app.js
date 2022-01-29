@@ -71,7 +71,7 @@ const campsMock = [
     skill: "프론트엔드",
     startDate: "2022-02-9",
     thumbnail:
-      "https://cdn.pixabay.com/photo/2015/07/17/22/43/student-849825__480.jpg",
+      "https://cdn.pixabay.com/photo/2015/07/17/22/42/startup-849804__340.jpg",
   },
   {
     id: 5,
@@ -126,7 +126,7 @@ const campsMock = [
     skill: "인공지능",
     startDate: "2021-03-10",
     thumbnail:
-      "https://cdn.pixabay.com/photo/2017/08/01/00/38/man-2562325__340.jpg",
+      "https://cdn.pixabay.com/photo/2016/11/19/14/00/code-1839406__340.jpg",
   },
   {
     id: 5,
@@ -137,26 +137,26 @@ const campsMock = [
     skill: "백엔드",
     startDate: "2021-03-13",
     thumbnail:
-      "https://cdn.pixabay.com/photo/2017/08/01/00/38/man-2562325__340.jpg",
+      "https://cdn.pixabay.com/photo/2015/07/17/22/43/student-849825__480.jpg",
   },
 ];
 
 const communityMock = [
   {
     id: 21,
-    tags: ["야호", "정말"],
+    tags: ["조회수 TOP", "취업 고민"],
     title: "합격 메일 답장 어떻게 할까요?",
     content: "고칠 부분이 있는지 봐주시면 감사하겠습니다!",
     comments: [
       {
         profile: "https://cdn.comento.kr/images/pt/tmp/prefix_44UsYDVNuM.jpg",
-        content: "와우",
-        nickname: "멘토1234",
+        content: "안녕하세요. 먼저 합격 축하드립니다.",
+        nickname: "Jacob",
       },
       {
         profile: "https://cdn.comento.kr/images/pt/tmp/prefix_44UsYDVNuM.jpg",
-        content: "za",
-        nickname: "멘토1234",
+        content: "메일의 서문을 시작할 때는 이렇게 해주세요.",
+        nickname: "KMJ",
       },
     ],
   },
