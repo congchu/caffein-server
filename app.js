@@ -1,18 +1,109 @@
-var express = require('express')
+var express = require("express");
+const PORT = process.env.PORT || 5000;
 
-const PORT = process.env.PORT || 5000
+var app = express();
 
-// express 는 함수이므로, 반환값을 변수에 저장한다.
-var app = express()
+//Express 4.16.0버전 부터 body-parser의 일부 기능이 익스프레스에 내장 body-parser 연결
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// 5000 포트로 서버 오픈
+//임시 데이터
+const users = [
+  { id: 1, name: "유저1" },
+  { id: 2, name: "유저2" },
+  { id: 3, name: "유저3" },
+];
+
+/**
+ * @path { GET } http://localhost:3000/api/users
+ * @description 요청 데이터 값이 없고 반환 값이 있는 GET Method
+ */
+
+app.get("/api/users", (req, res) => {
+  //유저 정보 반환
+  res.json({ users: users });
+});
+
+/**
+ * @path {GET} http://localhost:3000/api/users/:user_id
+ * @description Path Variables 요청 데이터 값이 있고 반환 값이 있는 GET Method
+ *
+ *  Path Variables 방식
+ *
+ *  ex) 아래 GET 주소 에서 :user_id 는 서버에서 설정한 주소 키 값이다.
+ *      값을 찾을 때는 req.params.user_id 로 값을 찾는다.
+ *
+ *  *주의 사항*
+ *  :user_id 이 부분은 변수이기 때문에
+ *  경로가 /users/1 이거나 /users/2 이거 일때 둘다 라우터를 거치게 된다.
+ *  그렇기 때문에 다른 라우터 보다 아래 있어야 한다.
+ */
+
+app.get("/api/users/:user_id", (req, res) => {
+  const user_id = req.params.user_id;
+
+  //filter라는 함수는 자바스크립트에서 배열 함수이다. 필터링을 할때 많이 사용된다 필터링한 데이터를 새로운 배열로 반환한다.
+  const user = users.filter((data) => data.id == user_id);
+
+  res.json({ ok: true, user: user });
+});
+
+/**
+ * @path {POST} http://localhost:3000/api/users
+ * @description POST Method
+ *
+ *  POST 데이터를 생성할 때 사용된다.
+ *  req.body에 데이터를 담아서 보통 보낸다.
+ */
+app.post("/api/users", (req, res) => {
+  // 구조분해를 통해 id 와 name을 추출
+  const { id, name } = req.body;
+
+  //concat 함수는 자바스크립트에서 배열 함수이다. 새로운 데이터를 추가하면 새로운 배열로 반환한다.
+  const user = users.concat({ id, name });
+
+  res.json({ ok: true, users: user });
+});
+
+/**
+ * @path {PUT} http://localhost:3000/api/users
+ * @description 전체 데이터를 수정할 때 사용되는 Method
+ */
+app.put("/api/users/:user_id", (req, res) => {
+  const user_id = req.params.user_id;
+  const { name } = req.body;
+
+  //filter라는 함수는 자바스크립트에서 배열 함수이다. 필터링을 할때 많이 사용된다 필터링한 데이터를 새로운 배열로 반환한다.
+  const user = users.filter((data) => data.id == user_id);
+
+  res.json({ ok: true, user: user });
+});
+
+/**
+ * @path {PATCH} http://localhost:3000/api/user/update/:user_id
+ * @description 단일 데이터를 수정할 때 사용되는 Method
+ */
+app.patch("/api/user/:user_id", (req, res) => {
+  const { user_id } = req.params;
+  const { name } = req.body;
+
+  //map 함수는 자바스크립트에서 배열 함수이다. 요소를 일괄적으로 변경할 때 사용됩니다.
+  const user = users.map((data) => {
+    if (data.id == user_id) data.name = name;
+
+    return {
+      id: data.id,
+      name: data.name,
+    };
+  });
+
+  res.json({ ok: true, users: user });
+});
+
+app.get("/", function (req, res) {
+  res.send("Hello, This is API Server for Caffein");
+});
+
 app.listen(PORT, function () {
-    console.log("start! express server on port 3000")
-})
-
-// request 와 response 라는 인자를 줘서 콜백 함수를 만든다.
-// localhost:5000 브라우저에 res.send() 내부의 문자열이 띄워진다.
-
-app.get('/', function (req, res) {
-    res.send("<h1>hi friend!</h1>")
-})
+  console.log("start! express server on port 5000");
+});
