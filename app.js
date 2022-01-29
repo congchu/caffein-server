@@ -149,12 +149,14 @@ const communityMock = [
     content: "고칠 부분이 있는지 봐주시면 감사하겠습니다!",
     comments: [
       {
-        profile: "https://cdn.comento.kr/images/pt/tmp/prefix_44UsYDVNuM.jpg",
+        profile:
+          "https://cdn.pixabay.com/photo/2022/01/19/19/41/san-francisco-6950837_960_720.jpg",
         content: "안녕하세요. 먼저 합격 축하드립니다.",
         nickname: "Jacob",
       },
       {
-        profile: "https://cdn.comento.kr/images/pt/tmp/prefix_44UsYDVNuM.jpg",
+        profile:
+          "https://cdn.pixabay.com/photo/2021/07/25/12/22/tourist-attraction-6491734__340.jpg",
         content: "메일의 서문을 시작할 때는 이렇게 해주세요.",
         nickname: "KMJ",
       },
