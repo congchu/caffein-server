@@ -29,7 +29,7 @@ app.get("/api/camps", (req, res) => {
 // Community APIs
 
 app.get("/api/communities", (req, res) => {
-  res.json({ data: communityMock });
+  res.json({ data: communitiesMock });
 });
 
 app.get("/api/communities/:community_id", (req, res) => {
@@ -43,13 +43,6 @@ app.get("/", function (req, res) {
 app.listen(PORT, function () {
   console.log("start! express server on port 5000");
 });
-
-//임시 데이터
-const users = [
-  { id: 1, name: "유저1" },
-  { id: 2, name: "유저2" },
-  { id: 3, name: "유저3" },
-];
 
 const campsMock = [
   {
@@ -192,7 +185,7 @@ const campDetailMock = {
   ],
 };
 
-const communityMock = [
+const communitiesMock = [
   {
     id: 21,
     tags: ["조회수 TOP", "취업 고민"],
