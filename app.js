@@ -10,9 +10,8 @@ app.use(cors());
 
 // Ccamp APIs
 app.get("/api/camps/:camp_id", (req, res) => {
-  const camp_id = req.params.camp_id;
-  const camp = campsMock.find((camp) => camp.id == camp_id);
-  res.json({ data: camp });
+  // const camp_id = req.params.camp_id;
+  res.json({ data: campDetailMock });
 });
 
 app.get("/api/camps", (req, res) => {
@@ -33,7 +32,9 @@ app.get("/api/communities", (req, res) => {
 });
 
 app.get("/api/communities/:community_id", (req, res) => {
-  res.json({ data: campsMock });
+  const community_id = req.params.community_id;
+  const communtiy = communitiesMock.find(id === community_id);
+  res.json({ data: communtiy });
 });
 
 app.get("/", function (req, res) {
