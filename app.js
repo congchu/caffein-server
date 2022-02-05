@@ -140,6 +140,57 @@ const campsMock = [
       "https://cdn.pixabay.com/photo/2015/07/17/22/43/student-849825__480.jpg",
   },
 ];
+const campDetailMock = {
+  tags: ["프로그래밍", "React"],
+  name: "[2기 모집] React 초보자를 위한 실무 프로젝트로 역량 업그레이드",
+  desc: "입문자 대상 베이직 클래스입니다.",
+  startDate: "22.02.20(일) 12:00",
+  process: "6주, 온라인 LIVE",
+  seat: "8명 소수정예",
+  reviewMaterial: ["복습VOD", "PDF강의자료"],
+  headerImage:
+    "https://raw.githubusercontent.com/congchu/caffein-server/master/assets/images/camp_header.png",
+  images: [
+    "https://raw.githubusercontent.com/congchu/caffein-server/master/assets/images/camp_1.png",
+    "https://raw.githubusercontent.com/congchu/caffein-server/master/assets/images/camp_2.png",
+    "https://raw.githubusercontent.com/congchu/caffein-server/master/assets/images/camp_3.png",
+  ],
+
+  reviews: [
+    {
+      content:
+        "저는 완전히 모르는 상태에서 시작했고 기대도<br/>높지 않았는데, <b>끝까지 해내고 보니 굉장히<br/>성장한</b> 느낌이에요.<br/>직장 다니면서 뭔가 끝까지 해본 게 처음이라..<br/><br/><b>'아무것도 모르는 사람도 할 수 있어요'라는 문구가 진짜 거짓이 아니었네요.</b>",
+      reviewer: "수료생 김태희님",
+    },
+    {
+      content:
+        "매주 받는 <b>강의 자료랑 과제 내용이 업무에서<br/>흔하게 일어날 수 있는 상황 중심</b>이어서,<br/>'우리 회사라면 이런 식으로 해볼 수 있겠다.'<br/>라고 생각하며 수업을 들었구요.<br/>이론도 실무랑 연계되는 내용으로 알려주셔서<br/><b>바로 업무에 적용</b>할 수 있었어요.<br/>",
+      reviewer: "수료생 김태형님",
+    },
+    {
+      content:
+        "라이브니까, 공부하면서 궁금한 걸 바로바로<br/>물어볼 수 있는게 제일 좋았어요!<br/>VOD 강의 많이 들어봤지만 VOD는 궁금한 걸<br/>물어볼 수도 없고, 물어볼 수 있다고 해도<br/>답변 받는데 진짜 오래 걸렸거든요.<br/>소통이 즉각적이라는 게 가장 좋았어요.<br/>",
+      reviewer: " 수료생 임미성님",
+    },
+    {
+      content:
+        "멘토님도 퇴근하고 강의하시느라 힘드실 텐데<br/><b>라이브 강의 때마다 정말 정성스럽게<br/>과제 리뷰랑 피드백</b>을 너무 잘 해주셨구요.<br/>꼭 강의 때가 아니더라도 <b>어려운 거 있을 때마다<br/>하나하나 같이 해주시고 질문도 잘 받아주셔서</b><br/>더 열심히 할 수 있었어요.",
+      reviewer: "수료생 김태희님",
+    },
+  ],
+  faqs: [
+    {
+      question: "React 경험이 없는데 참여할 수 있나요?",
+      answer:
+        "React 경험이 있는 분들이 협업 관점에서 업그레이드 할 수 있게 도와드리는데 목적이 있는 클래스입니다. React 기초 강의는 제공하지 않기 때문에 따로 React 공부 하실 수 있는 분들께 추천드립니다.",
+    },
+    {
+      question: " 실무PT, 직무부트캠프와 어떤 차이점이 있나요?",
+      answer:
+        "실무PT는 직무체험을 넘어 현업에 실무 스킬을 적용할 수 있도록 최적화된 프로그램입니다. 직무를 경험하는 것에 초점이 맞춰진 직무부트캠프와 달리 멘토와의 1: 1 질의응답, 정기 스터디세션, 이론강의 등 실무 맞춤형 과정이 더 제공되어 현업에 적용할 수 있을 때까지 도와드립니다.",
+    },
+  ],
+};
 
 const communityMock = [
   {
